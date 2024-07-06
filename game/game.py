@@ -37,7 +37,7 @@ create_grid_line(0, grid_spacing * 2, grid_width, grid_spacing * 2)
 create_grid_line(grid_spacing, 0, grid_spacing, grid_width)
 create_grid_line(grid_spacing * 2, 0, grid_spacing * 2, grid_width)
 
-# Drawing X and O shapes
+# Drawing X and O shapes.
 draw_x(grid_spacing // 2, grid_spacing // 2) # Top left
 draw_o(grid_spacing * 3 // 2, grid_spacing * 3 // 2) # Center
 
