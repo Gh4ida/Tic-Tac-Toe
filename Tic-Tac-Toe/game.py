@@ -5,7 +5,7 @@ window.title('TicTacToe')
 window.geometry("400x400")
 window.resizable(False, False)
 
-# Function to create a grid line on the canvas
+# Function to create a grid line 
 def create_grid_line(x0, y0, x1, y1, color="black", width=2):
     canvas.create_line(x0, y0, x1, y1, fill=color, width=width)
 
