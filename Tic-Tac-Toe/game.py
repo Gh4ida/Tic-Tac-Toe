@@ -2,22 +2,28 @@ from tkinter import *
 
 window = Tk()
 window.title('TicTacToe')
-window.geometry("400x400")
+window.geometry("400x430")
 window.resizable(False, False)
 
-# Function to create a grid line.
-def create_grid_line(x0, y0, x1, y1, color="black", width=2):
-    canvas.create_line(x0, y0, x1, y1, fill=color, width=width)
+# Create a label for displaying game result
+result_label = Label(window, text="", font=("Arial", 16))
+result_label.pack()
 
 # Create the canvas
 canvas = Canvas(window, width=400, height=400, bg="white")
 canvas.pack()
+
 # Draw the grid lines
 grid_width = 400
 grid_spacing = grid_width // 3  # Divide width into 3 equal sections
 board = [["", "", ""], ["", "", ""], ["", "", ""]] 
 player = "X"
+result_label.config(text=f"{player}'s turn")
 win = 0
+
+# Function to create a grid line 
+def create_grid_line(x0, y0, x1, y1, color="black", width=2):
+    canvas.create_line(x0, y0, x1, y1, fill=color, width=width)
 
 def create_board():
     create_grid_line(0, grid_spacing, grid_width, grid_spacing)
@@ -35,32 +41,46 @@ def place_symbol(x, y):
     row = y // cell_width
 
     if win == 1:
-        return reset_board()
+        reset_board()
+        return
 
     if board[row][col] == "":
         cell_center_x = (col * cell_width) + (cell_width // 2)
         cell_center_y = (row * cell_width) + (cell_width // 2)
 
         if player == "X":
+            result_label.config(text=f"{player}'s turn")
+
             canvas.create_text(cell_center_x, cell_center_y, text="X", font=("Arial", 45), fill="blue")
             board[row][col] = "X"
             if winner():
                 win = 1
-                print(f"{player} is the winner")
-            elif draw():
+                result_label.config(text=f"{player} is the winner")
+                return
+            elif tie():
                 win = 1
-                print("No one wins!")
+                result_label.config(text="It is a tie!")
+                return
             player = "O"
+            result_label.config(text=f"{player}'s turn")
+
         else:
+            result_label.config(text=f"{player}'s turn")
+
             canvas.create_text(cell_center_x, cell_center_y, text="O", font=("Arial", 45), fill="red")
+
             board[row][col] = "O"
             if winner():
                 win = 1
-                print(f"{player} is the winner")
-            elif draw():
+                result_label.config(text=f"{player} is the winner")
+                return
+            elif tie():
                 win = 1
-                print("No one wins!")
+                result_label.config(text="It is a tie!")
+                return
             player = "X"
+        
+            result_label.config(text=f"{player}'s turn")
 
 def winner():
     for row in range(3):
@@ -75,7 +95,7 @@ def winner():
         return True
     return False
 
-def draw():
+def tie():
     for row in board:
         if "" in row:
             return False
@@ -87,6 +107,7 @@ def reset_board():
     board = [["", "", ""], ["", "", ""], ["", "", ""]] 
     player = "X"
     win = 0
+    result_label.config(text=f"{player}'s turn")
     create_board()
 
 # Function to handle the click event on the canvas
