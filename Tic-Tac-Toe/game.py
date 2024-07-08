@@ -1,15 +1,16 @@
 from tkinter import *
 
+# Create a window
 window = Tk()
 window.title('TicTacToe')
 window.geometry("400x430")
 window.resizable(False, False)
 
-# Create a label for displaying game result
+# Create a label bar for displaying the game's result
 result_label = Label(window, text="", font=("Arial", 16))
 result_label.pack()
 
-# Create the canvas
+# Create the canva
 canvas = Canvas(window, width=400, height=400, bg="white")
 canvas.pack()
 
@@ -21,7 +22,6 @@ player = "X"
 result_label.config(text=f"{player}'s turn")
 win = 0
 
-# Function to create a grid line 
 def create_grid_line(x0, y0, x1, y1, color="black", width=2):
     canvas.create_line(x0, y0, x1, y1, fill=color, width=width)
 
