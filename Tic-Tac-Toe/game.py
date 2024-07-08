@@ -15,7 +15,7 @@ canvas.pack()
 
 # Draw the grid lines
 grid_width = 400
-grid_spacing = grid_width // 3  # Divide width into 3 equal sections
+cell = grid_width // 3  # Divide width into 3 equal sections
 board = [["", "", ""], ["", "", ""], ["", "", ""]] 
 player = "X"
 result_label.config(text=f"{player}'s turn")
@@ -26,17 +26,16 @@ def create_grid_line(x0, y0, x1, y1, color="black", width=2):
     canvas.create_line(x0, y0, x1, y1, fill=color, width=width)
 
 def create_board():
-    create_grid_line(0, grid_spacing, grid_width, grid_spacing)
-    create_grid_line(0, grid_spacing * 2, grid_width, grid_spacing * 2)
-    create_grid_line(grid_spacing, 0, grid_spacing, grid_width)
-    create_grid_line(grid_spacing * 2, 0, grid_spacing * 2, grid_width)
+    create_grid_line(0, cell, grid_width, cell)
+    create_grid_line(0, cell * 2, grid_width, cell * 2)
+    create_grid_line(cell, 0, cell, grid_width)
+    create_grid_line(cell * 2, 0, cell * 2, grid_width)
 
 create_board()
 # Function to place X or O on the board
 def place_symbol(x, y):
-    global win
-    global player
-    cell_width = grid_spacing
+    global win, player
+    cell_width = cell
     col = x // cell_width
     row = y // cell_width
 
