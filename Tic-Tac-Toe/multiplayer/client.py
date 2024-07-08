@@ -3,7 +3,7 @@ import aiohttp
 from tkinter import *
 import threading
 
-SERVER_URL = 'http://37.114.50.196:5000'  # Change this to your server's URL
+SERVER_URL = 'http://x.x.x.x:5000'  # Change this to your server's URL
 
 window = Tk()
 window.title('TicTacToe')
